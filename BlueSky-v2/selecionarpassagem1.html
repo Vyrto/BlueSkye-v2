@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Curso de Linux</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script
+      src="https://kit.fontawesome.com/your-font-awesome-kit.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body style="background-color: black;">
+    <header>
+      
+      <h1>BlueSky<ion-icon name="airplane-outline"></ion-icon></h1>
+      
+      <nav>
+        <ul>
+          <li><a href="index.html " class="nav-link px-2 text-white linkBtn">Página Inicial</a></li>
+          <li><a href="selecionarpassagem1.html" class="active">Pesquisar voos</a></li>
+          <li><a href="selecionarpassagem2.html" class="nav-link px-2 text-white linkBtn">Voos Ida e Volta</a></li>
+          <li><a href="sobre.html" class="nav-link px-2 text-white linkBtn">Sobre Nós</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="content">
+        <section>
+          <div class="timeline">
+            <div class="events">
+              <ol>
+                <ul>
+                  <li>
+                    <a href="#0" class="selected">Escolha seu voo de ida</a>
+                  </li>
+                  <li>
+                    <a href="selecionarpassagem2.html" >Escolha seu voo ida e volta</a>
+                  </li>
+                  <li>
+                    <a href="#1">Seus Dados</a>
+                  </li>
+                  <li>
+                    <a href="#2">Pagamento</a>
+                  </li>
+                </ul>
+              </ol>
+            </div>
+          </div>
+          <div class="sumario"> </div>
+            
+          
+          <div class="events-content">
+            <ol>
+              <li id="direot" class="selected">
+                <h2 style="color: #fff" style="text-align:center">Escolha seu voo de ida</h2>
+              </li>
+            </ol>
+          </div>
+          <table>
+            <thead>
+              <tr style="border-bottom: 3px solid #eee;">
+                <th style="text-align: left; padding-bottom: 10px; text-transform: uppercase;">Origem</th>
+                <th style="text-align: left; padding-bottom: 10px; text-transform: uppercase;">Destino</th>
+                <th style="text-align: left; padding-bottom: 10px; text-transform: uppercase;">Duração</th>
+                <th style="text-align: left; padding-bottom: 10px; text-transform: uppercase;">Operado por </th>
+                <th style="text-align: left; padding-bottom: 10px; text-transform: uppercase;">A partir de</th>
+                <th style="text-align: left; padding-bottom: 10px; text-transform: uppercase; ">Comprar</th>
+              </tr>
+            </thead>
+            <tbody id="voos">
+  
+            </tbody>
+          </table>
+        </section>
+      </div>
+  
+    </main>
+    <footer class="footer">
+      <p>&copy; 2023 BlueSky. Criado por Alan Bezerra, Erik Kestring , Gabriel da Silva, Vytor Oliveira. Todos os direitos reservados.</p>
+    </footer>
+    <script>
+    
+      var voosLista = [
+        {
+          origem: 'CWB - 06:00',
+          destino: 'GRU - 07:10',
+          duracao: '1:10',
+          empresa: 'AMB Linhas Aereas <br /><u>Direto</u>',
+          valor: '332,00',
+        },
+        {
+          origem: 'CWB - 08:00',
+          destino: 'CGH - 09:10',
+          duracao: '1:10',
+          empresa: 'EAK Airlines <br /><u>Direto</u>',
+          valor: '385,00',
+        },
+        {
+          origem: 'CWB - 10:00',
+          destino: 'VCP - 11:15',
+          duracao: '1:15',
+          empresa: 'VDO Linhas Aereas <br /><u>Direto</u>',
+          valor: '399,00',
+        },
+        {
+          origem: 'CWB - 12:00',
+          destino: 'GRU - 13:10',
+          duracao: '1:10',
+          empresa: 'GDS Airlines <br /><u>Direto</u>',
+          valor: '349,00',
+        },
+        {
+          origem: 'CWB - 15:00',
+          destino: 'CGH - 16:05',
+          duracao: '1:05',
+          empresa: 'AMB Linhas Aereas <br /><u>Direto</u>',
+          valor: '449,99',
+        }
+      ]
+  
+      var voosTable = document.getElementById('voos');
+  
+      voosLista.forEach(function(item, index) {
+          console.log("Índice:", index);
+          var novoVoo = document.createElement('tr');
+          
+          var origemCol = document.createElement('td');
+          origemCol.innerHTML = item.origem;
+          
+          var destinoCol = document.createElement('td');
+          destinoCol.innerHTML = item.destino;
+  
+          var duracaoCol = document.createElement('td');
+          duracaoCol.innerHTML = item.duracao;
+  
+          var empresaCol = document.createElement('td');
+          empresaCol.innerHTML = item.empresa;
+  
+          var valorCol = document.createElement('td');
+          valorCol.innerHTML = "R$ " + item.valor;
+  
+          var comprarCol = document.createElement('td');
+          comprarCol.innerHTML = "<button data-passagem="+ index + " class=\"form-button comprar\">Comprar</button>"
+         
+          novoVoo.appendChild(origemCol);
+          novoVoo.appendChild(destinoCol);
+          novoVoo.appendChild(duracaoCol);
+          novoVoo.appendChild(empresaCol);
+          novoVoo.appendChild(valorCol);
+          novoVoo.appendChild(comprarCol);
+          
+          voosTable.appendChild(novoVoo);
+  
+        });
+    </script> 
+    <script>
+      function botaoClicado(event) {
+        var passagem = event.target.dataset.passagem;
+        console.log("A variável é:", passagem);
+        localStorage.setItem("comprar", voosLista[passagem].valor);
+        window.location.href = 'dadospassageiro.html';
+        console.log(passagem)
+      }
+  
+      var botoes = document.getElementsByClassName('comprar');
+      
+      for (var i = 0; i < botoes.length; i++) {
+        botoes[i].addEventListener('click', botaoClicado);
+      }
+    </script>
+  </body>
+</html>

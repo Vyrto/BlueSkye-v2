@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Curso de Linux</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script
+      src="https://kit.fontawesome.com/your-font-awesome-kit.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="pagina1">
+    <header>
+      
+      <h1>BlueSky<ion-icon name="airplane-outline"></ion-icon></h1>
+      
+      <nav>
+        <ul>
+          <li><a href="index.html " class="nav-link px-2 text-white linkBtn">Página Inicial</a></li>
+          <li><a href="selecionarpassagem1.html" class="nav-link px-2 text-white linkBtn">Pesquisar voos</a></li>
+          <li><a href="selecionarpassagem2.html" class="nav-link px-2 text-white linkBtn">Voos Ida e Volta</a></li>
+          <li><a href="sobre.html" class="nav-link px-2 text-white linkBtn">Sobre Nós</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="content">
+      <section>
+        <div class="timeline">
+          <div class="events">
+            <ol>
+              <ul>
+                <li>
+                  <a href="selecionarpassagem1.html" >Escolha seu voo de ida</a>
+                </li>
+                <li>
+                  <a href="selecionarpassagem2.html" >Escolha seu voo ida e volta</a>
+                </li>
+                <li>
+                  <a href="dadospassageiro.html" >Seus Dados</a>
+                </li>
+                <li>
+                  <a href="#2" class="selected">Pagamento</a>
+                </li>
+              </ul>
+            </ol>
+          </div>
+        </div>
+        <div class="sumario"> </div>
+        <div class="events-content">
+          <ol>
+            <li id="direot" class="selected">
+              <h3>Selecione a forma de pagamento e preencha os dados</h3>
+            </li>
+          </ol>
+        </div>
+        <div class="forma-de-pagamento">
+          <h2>Formas de Pagamento</h2>
+          <div class="form-row">
+            <input type="radio" name="payment-method" id="pix-option" checked>
+            <label for="pix-option">PIX</label>
+          </div>
+          <div class="form-row">
+            <input type="radio" name="payment-method" id="credit-card-option" >
+            <label for="credit-card-option">Cartão de Crédito</label>
+          </div>
+          
+          <!-- Opções do PIX -->
+          <div id="pix-options">
+            <div class="form-row">
+              <label class="form-label">À vista:</label>
+              <input type="text" class="form-input valorArmazenado" value="" readonly>
+            </div>
+          </div>
+          
+          <!-- Opções do Cartão de Crédito -->
+          <div id="credit-card-options" style="display: none;">
+            <div class="form-row">
+              <input type="text" class="form-input valorArmazenado" id="valorCredito" value="" readonly>
+              <label class="form-label">Parcelamento:</label>
+              <select class="form-select" id="numeroParcelas" onchange="calcularParcelas()">
+                <option value="1">1x</option>
+                <option value="2">2x</option>
+                <option value="3">3x</option>
+                <option value="4">4x</option>
+                <option value="5">5x</option>
+                <option value="6">6x</option>
+                <option value="7">7x</option>
+                <option value="8">8x</option>
+                <option value="9">9x</option>
+                <option value="10">10x</option>
+                <option value="11">11x</option>
+                <option value="12">12x</option>
+              </select>
+              <h4 id="resultado"><strong></strong></h4>
+              
+            </div>
+            
+            <div class="form-row">
+              <label class="form-label">Bandeira:</label>
+              <select class="form-select" id="card-brand">
+                <option value="visa">Visa</option>
+                <option value="mastercard">Mastercard</option>
+                <option value="amex">American Express</option>
+                <option value="diners">Diners Club</option>
+              </select>
+            </div>
+            
+            <div class="form-row">
+              <label class="form-label">Número do Cartão:</label>
+              <input type="text" class="form-input" id="card-number" placeholder="1234 5678 9012 3456">
+            </div>
+            
+            <div class="form-row">
+              <label class="form-label">Validade:</label>
+              <input type="text" class="form-input" id="card-expiration" placeholder="06/29">
+            </div>
+            
+            <div class="form-row">
+              <label class="form-label">Código de Segurança:</label>
+              <input type="text" class="form-input" id="card-cvv" placeholder="392">
+            </div>
+            
+            <div class="form-row">
+              <label class="form-label">Nome do Titular:</label>
+              <input type="text" class="form-input" id="card-holder-name" placeholder="JOÃO DA SILVA">
+            </div>
+          </div>
+        </div>
+      
+        <div class="formulario-passageiro">
+          <h2>Dados do Titular do Cartão</h2>
+          <div class="form-row">
+            <label class="form-label" for="tipo-pessoa">Tipo de Pessoa:</label>
+            <select class="form-select" id="tipo-pessoa" onchange="toggleFields()" required>
+              <option value="">Selecione</option>
+              <option value="pessoa-fisica">Pessoa Física</option>
+              <option value="pessoa-juridica">Pessoa Jurídica</option>
+            </select>
+          </div>
+          
+          <!-- Campos para Pessoa Física -->
+          <div id="pessoa-fisica-fields" style="display: none;">
+            <div class="form-row">
+              <label class="form-label" for="nome">Nome:</label>
+              <input type="text" class="form-input" id="nome" placeholder="João" required>
+            </div>
+          
+            <div class="form-row">
+              <label class="form-label" for="sobrenome">Sobrenome Completo:</label>
+              <input type="text" class="form-input" id="sobrenome" placeholder="da Silva" required>
+            </div>
+          
+            <div class="form-row">
+              <label class="form-label" for="nascimento">Nascimento:</label>
+              <input type="text" class="form-input" id="nascimento" placeholder="00/00/0000" required>
+            </div>
+          
+            <div class="form-row">
+              <label class="form-label" for="cpf">CPF:</label>
+              <input type="text" class="form-input" id="cpf" placeholder="131.724.559-75" required>
+            </div>
+            
+            <div class="form-row">
+              <label class="form-label" for="sexo">Sexo:</label>
+              <select class="form-select" id="sexo" required>
+                <option value="">Selecione</option>
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+              </select>
+            </div>
+            
+            <div class="form-row">
+              <label class="form-label" for="cep">CEP:</label>
+              <input type="text" class="form-input" id="cep" placeholder="899224-036" required>
+            </div>
+            
+            <div class="form-row">
+              <label class="form-label" for="telefone">Telefone Móvel:</label>
+              <input type="text" class="form-input" id="telefone" placeholder="(47)99257-7752" required>
+            </div>
+            
+            <div class="form-row">
+              <label class="form-label" for="email">Email:</label>
+              <input type="email" class="form-input" id="email" placeholder="joaosilvaa@hotmail.com" required>
+            </div>
+            
+            <div class="form-row">
+              <input type="checkbox" id="checkbox1" name="opcao1" value="opcao1">
+              <label for="checkbox1">Informações sobre status do pedido, pagamento e emissão serão enviadas para o e-mail do pagador.</label>
+            </div>
+          </div>
+          
+          <!-- Campos para Pessoa Jurídica -->
+          <div id="pessoa-juridica-fields" style="display: none;">
+            <div class="form-row">
+              <label class="form-label" for="nome">Nome:</label>
+              <input type="text" class="form-input" id="nome" placeholder="João" required>
+            </div>
+          
+            <div class="form-row">
+              <label class="form-label" for="sobrenome">Sobrenome Completo:</label>
+              <input type="text" class="form-input" id="sobrenome" placeholder="da Silva" required>
+            </div>
+          
+            <div class="form-row">
+              <label class="form-label" for="nascimento">Nascimento:</label>
+              <input type="text" class="form-input" id="nascimento" placeholder="00/00/0000" required>
+            </div>
+          
+            <div class="form-row">
+              <label class="form-label" for="cpf">CPF:</label>
+              <input type="text" class="form-input" id="cpf" placeholder="302.543.234-87" required>
+            </div>
+            
+            <div class="form-row">
+              <label class="form-label" for="sexo">Sexo:</label>
+              <select class="form-select" id="sexo" required>
+                <option value="">Selecione</option>
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+              </select>
+            </div>
+            
+            <div class="form-row">
+              <label class="form-label" for="cnpj">CNPJ:</label>
+              <input type="text" class="form-input" id="cnpj" placeholder="06859798/0001-08" required>
+            </div>
+            
+            <div class="form-row">
+              <label class="form-label" for="nome-empresa">Nome da Empresa:</label>
+              <input type="text" class="form-input" id="nome-empresa" placeholder="FJ Construtora" required>
+            </div>
+            
+            <div class="form-row">
+              <label class="form-label" for="cep">CEP:</label>
+              <input type="text" class="form-input" id="cep" placeholder="899224-036" required>
+            </div>
+            
+            <div class="form-row">
+              <label class="form-label" for="telefone">Telefone Móvel:</label>
+              <input type="text" class="form-input" id="telefone" placeholder="(47)99257-7752" required>
+            </div>
+            
+            <div class="form-row">
+              <label class="form-label" for="email">Email:</label>
+              <input type="email" class="form-input" id="email" placeholder="joaosilvaa@hotmail.com" required>
+            </div>
+            
+            <div class="form-row">
+              <input type="checkbox" id="checkbox1" name="opcao1" value="opcao1">
+              <label for="checkbox1">Informações sobre status do pedido, pagamento e emissão serão enviadas para o e-mail do pagador.</label>
+      
+                  </div>
+          </div>
+          <button class="form-button" onclick="submitForm()">Gerar Pedido</button>
+        </div>
+      </section>
+
+    <script src="script.js"></script>
+    <script>
+        var valorSalvo = localStorage.getItem("comprar");
+        var inputsValorArmazenado = document.getElementsByClassName('valorArmazenado');
+        for (var i = 0; i < inputsValorArmazenado.length; i++) {
+          inputsValorArmazenado[i].value = "R$ " + valorSalvo;
+        }
+    </script>
+    <footer class="footer2">
+      <p>&copy; 2023 BlueSky. Criado por Alan Bezerra, Erik Kestring , Gabriel da Silva, Vytor Oliveira. Todos os direitos reservados.</p>
+    </footer> 
+
+  </body>
+
+</html>
